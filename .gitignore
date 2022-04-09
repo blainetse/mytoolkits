@@ -1,5 +1,5 @@
 # Byte-compiled / optimized / DLL files
-VOT2022_LT/
+!VOT2022_LT/sequences/list.txt
 __pycache__/
 *.py[cod]
 *$py.class
