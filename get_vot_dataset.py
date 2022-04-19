@@ -7,39 +7,12 @@ from tqdm import tqdm
 from urllib.parse import urlparse, urljoin
 
 
-def get_data(stack):
+def get_data(url):
     """Step1: 获取数据集下载链接
 
     Args:
-        stack: 具体要下载的数据集名称，对应到 `VOT_DATASETS` 里面的 `key` 值
+        url: 数据集对应的 `json` 文件下载链接，可以直接在浏览器中输入该链接，查看其内容
     """
-
-    VOT_DATASETS = {
-        "vot2013": "http://data.votchallenge.net/vot2013/dataset/description.json",
-        "vot2014": "http://data.votchallenge.net/vot2014/dataset/description.json",
-        "vot2015": "http://data.votchallenge.net/vot2015/dataset/description.json",
-        "vot-tir2015": "http://www.cvl.isy.liu.se/research/datasets/ltir/version1.0/ltir_v1_0_8bit.zip",
-        "vot2016": "http://data.votchallenge.net/vot2016/main/description.json",
-        "vot-tir2016": "http://data.votchallenge.net/vot2016/vot-tir2016.zip",
-        "vot2017": "http://data.votchallenge.net/vot2017/main/description.json",
-        "vot-st2018": "http://data.votchallenge.net/vot2018/main/description.json",
-        "vot-lt2018": "http://data.votchallenge.net/vot2018/longterm/description.json",
-        "vot-st2019": "http://data.votchallenge.net/vot2019/main/description.json",
-        "vot-lt2019": "http://data.votchallenge.net/vot2019/longterm/description.json",
-        "vot-rgbd2019": "http://data.votchallenge.net/vot2019/rgbd/description.json",
-        "vot-rgbt2019": "http://data.votchallenge.net/vot2019/rgbtir/meta/description.json",
-        "vot-st2020": "https://data.votchallenge.net/vot2020/shortterm/description.json",
-        "vot-rgbt2020": "http://data.votchallenge.net/vot2020/rgbtir/meta/description.json",
-        "vot-st2021": "https://data.votchallenge.net/vot2021/shortterm/description.json",
-        "test": "http://data.votchallenge.net/toolkit/test.zip",
-        "segmentation": "http://box.vicos.si/tracking/vot20_test_dataset.zip",
-        "vot2022/rgbd": "https://data.votchallenge.net/vot2022/rgbd/description.json",
-        "vot2022/depth": "https://data.votchallenge.net/vot2022/depth/description.json",
-        "vot2022/stb": "https://data.votchallenge.net/vot2022/stb/description.json",
-        "vot2022/sts": "https://data.votchallenge.net/vot2022/sts/description.json",
-        "vot2022/lt": "https://data.votchallenge.net/vot2022/lt/description.json",
-    }
-    url = VOT_DATASETS[stack]
     base_url = url.rsplit("/", 1)[0] + "/"
 
     try:
@@ -288,6 +261,31 @@ def write2squence(root, sequence):
 
 
 if __name__ == "__main__":
+    VOT_DATASETS = {
+        "vot2013": "http://data.votchallenge.net/vot2013/dataset/description.json",
+        "vot2014": "http://data.votchallenge.net/vot2014/dataset/description.json",
+        "vot2015": "http://data.votchallenge.net/vot2015/dataset/description.json",
+        "vot-tir2015": "http://www.cvl.isy.liu.se/research/datasets/ltir/version1.0/ltir_v1_0_8bit.zip",
+        "vot2016": "http://data.votchallenge.net/vot2016/main/description.json",
+        "vot-tir2016": "http://data.votchallenge.net/vot2016/vot-tir2016.zip",
+        "vot2017": "http://data.votchallenge.net/vot2017/main/description.json",
+        "vot-st2018": "http://data.votchallenge.net/vot2018/main/description.json",
+        "vot-lt2018": "http://data.votchallenge.net/vot2018/longterm/description.json",
+        "vot-st2019": "http://data.votchallenge.net/vot2019/main/description.json",
+        "vot-lt2019": "http://data.votchallenge.net/vot2019/longterm/description.json",
+        "vot-rgbd2019": "http://data.votchallenge.net/vot2019/rgbd/description.json",
+        "vot-rgbt2019": "http://data.votchallenge.net/vot2019/rgbtir/meta/description.json",
+        "vot-st2020": "https://data.votchallenge.net/vot2020/shortterm/description.json",
+        "vot-rgbt2020": "http://data.votchallenge.net/vot2020/rgbtir/meta/description.json",
+        "vot-st2021": "https://data.votchallenge.net/vot2021/shortterm/description.json",
+        "test": "http://data.votchallenge.net/toolkit/test.zip",
+        "segmentation": "http://box.vicos.si/tracking/vot20_test_dataset.zip",
+        "vot2022/rgbd": "https://data.votchallenge.net/vot2022/rgbd/description.json",
+        "vot2022/depth": "https://data.votchallenge.net/vot2022/depth/description.json",
+        "vot2022/stb": "https://data.votchallenge.net/vot2022/stb/description.json",
+        "vot2022/sts": "https://data.votchallenge.net/vot2022/sts/description.json",
+        "vot2022/lt": "https://data.votchallenge.net/vot2022/lt/description.json",
+    }
     ## 0.初始化相关数据
     # stack = "vot2022/lt"
     # version = "VOT2022_LT"
@@ -302,7 +300,7 @@ if __name__ == "__main__":
     }
 
     ## 1.获取下载链接
-    sequences_url, annos_url, fnames = get_data(stack)
+    sequences_url, annos_url, fnames = get_data(VOT_DATASETS[stack])
     # 输出下载链接
     # for fname, url in zip(fnames, sequences_url):
     #     print(f"{fname}: {url}")
